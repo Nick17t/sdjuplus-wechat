@@ -20,9 +20,13 @@ Page({
     setting: {
       showWeekend: true
     },
+    courseSetting: {
+      data: {}
+    },
     courseList: [],
     showSwitchWeek: false,
     showSetting: false,
+    showCourseChange: false,
     thisWeek: 1,
     weekSelected: weekList
   },
@@ -72,7 +76,8 @@ Page({
   closePanel () {
     this.setData({
       showSwitchWeek: false,
-      showSetting: false
+      showSetting: false,
+      showCourseChange: false
     });
   },
   changeWeek (event) {
@@ -95,6 +100,19 @@ Page({
       Notify({ type: 'primary', message: '周末学习，勤奋！', safeAreaInsetTop: true })
     }
   },
+
+  onLongPressCourse (e) {
+    console.log(e)
+    this.setData({
+      courseSetting: {
+        data: e.detail.data,
+        x: e.detail.x,
+        y: e.detail.y
+      },
+      showCourseChange: true
+    })
+  },
+
   refreshCourse () {
     course.freshenCourse(1002, true)
   }

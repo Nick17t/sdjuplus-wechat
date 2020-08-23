@@ -55,13 +55,19 @@ Component({
       let { x, y, courseList } = this.properties
       let judger = new Judger()
       let lesson = judger.hasLesson(x, y, courseList)
-      console.log(lesson)
       this.setData({
         lesson
       })
     },
     showChangePanel () {
-
+      this.triggerEvent('LongPressCourse', {
+        data: this.data.lesson,
+        x: this.properties.x,
+        y: this.properties.y
+      }, {
+        bubbles: true,
+        composed: true
+      })
     }
   }
 })

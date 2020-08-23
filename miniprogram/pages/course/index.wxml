@@ -1,4 +1,5 @@
 <wxs src="../../core/wxs/time.wxs" module="t"></wxs>
+<wxs src="../../core/wxs/course.wxs" module="c"></wxs>
 
 <van-sticky>
     <view class="d-flex bg-gradual-blue a-center j-center pb-1 position-relative" style="height: 174rpx;padding-top: {{statusBar.height}}rpx">
@@ -41,6 +42,7 @@
                     week="{{weekSelected.length + 1}}"
                     courseList="{{courseList}}"
                     thisWeek="{{thisWeek}}"
+                    bind:LongPressCourse="onLongPressCourse"
             />
         </van-col>
 
@@ -107,5 +109,76 @@
 
 
 </van-popup>
+
+<van-popup
+        show="{{showCourseChange}}"
+        round
+        closeable
+        bind:close="closePanel"
+>
+    <van-transition
+            show="{{showCourseChange}}"
+            name=""
+            duration="{{ { enter: 300, leave: 1000 } }}"
+            enter-class="van-enter-class"
+            enter-active-class="van-enter-active-class"
+            leave-active-class="van-leave-active-class"
+            leave-to-class="van-leave-to-class"
+    >
+        <van-panel
+                title="课程详情"
+                custom-class="course-detail-panel"
+                header-class="course-detail-title"
+        >
+            <van-cell-group>
+                <van-cell
+                        icon="todo-list-o"
+                        title="课程名称"
+                        title-class="course-name-title"
+                >
+                    {{courseSetting.data.data.name}}
+                </van-cell>
+                <van-cell
+                        icon="todo-list-o"
+                        title="教室"
+                        title-class="course-name-title"
+                >
+                    {{courseSetting.data.data.location}}
+                </van-cell>
+                <van-cell
+                        icon="todo-list-o"
+                        title="节数"
+                        title-class="course-name-title"
+                >
+                    周{{c.getLessonWeek(courseSetting.data.data.node)}}  {{c.transformCourseNode(courseSetting.data.data.node)}}节
+                </van-cell>
+                <van-cell
+                        icon="todo-list-o"
+                        title="周数"
+                        title-class="course-name-title"
+                >
+                    {{c.weekTransform(courseSetting.data.data.week)}}
+                </van-cell>
+            </van-cell-group>
+            <view class="d-flex">
+                <view class="flex-1 text-center">
+                    <van-cell
+                            title="编辑"
+                            clickable
+                            center
+                    />
+                </view>
+                <view class="flex-1 text-center">
+                    <van-cell
+                            title="完成"
+                            clickable
+                            center
+                    />
+                </view>
+            </view>
+        </van-panel>
+    </van-transition>
+</van-popup>
+
 
 <van-notify id="van-notify" />

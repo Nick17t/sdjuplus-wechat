@@ -42,10 +42,12 @@ function getWeek() {
 }
 
 function getCourseTimeWithNode(node) {
-  var arr = node.split('-')
-  var start = arr[0].toString()
-  var end = arr[1].toString()
-  return startTimeMap[start] + "-" + endTimeMap[end]
+  if (node) {
+    var arr = node.split('-')
+    var start = arr[0].toString()
+    var end = arr[1].toString()
+    return startTimeMap[start] + "-" + endTimeMap[end]
+  }
 }
 
 function getCourseStartTime(node) {
@@ -70,6 +72,11 @@ function getDateWithI(i) {
   return month + "/" + (day + i - index)
 }
 
+function NumberToChineseTransform(number) {
+  var arr = ['','一', '二', '三', '四', '五', '六', '日']
+  return arr[number]
+}
+
 
 module.exports = {
   getNowDay: getNowDay,
@@ -78,5 +85,6 @@ module.exports = {
   getCourseTimeWithNode: getCourseTimeWithNode,
   getDateWithI: getDateWithI,
   getCourseStartTime: getCourseStartTime,
-  getCourseEndTime: getCourseEndTime
+  getCourseEndTime: getCourseEndTime,
+  NumberToChineseTransform: NumberToChineseTransform
 }
