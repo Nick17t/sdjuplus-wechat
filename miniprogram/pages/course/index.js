@@ -21,7 +21,8 @@ Page({
       showWeekend: true
     },
     courseSetting: {
-      data: {}
+      data: {},
+      isEdit: false
     },
     courseList: [],
     showSwitchWeek: false,
@@ -102,12 +103,12 @@ Page({
   },
 
   onLongPressCourse (e) {
-    console.log(e)
     this.setData({
       courseSetting: {
         data: e.detail.data,
         x: e.detail.x,
-        y: e.detail.y
+        y: e.detail.y,
+        isEdit: !e.detail.data.has
       },
       showCourseChange: true
     })
@@ -115,6 +116,20 @@ Page({
 
   refreshCourse () {
     course.freshenCourse(1002, true)
+  },
+
+  inputChange () {
+
+  },
+  onEdit () {
+    const setting = {...this.data.courseSetting}
+    setting.isEdit = true
+    this.setData({
+      courseSetting: setting
+    })
+  },
+  onConfirm () {
+    this.closePanel()
   }
 }
 );

@@ -29,7 +29,7 @@ Page({
   },
 
   onLoad: function () {
-
+    this.showTransition();
   },
 
   onReady () {
@@ -41,10 +41,6 @@ Page({
     this.setData({
       userCourseList: course.getData()
     })
-  },
-
-  onShow () {
-    this.showTransition();
   },
 
   showTransition () {

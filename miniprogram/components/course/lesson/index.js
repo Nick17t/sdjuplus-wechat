@@ -1,6 +1,5 @@
 // components/course/lesson/index.js
 import {Judger} from '../../module/judger';
-import {randomColor} from '../../../core/utils/common';
 
 Component({
 

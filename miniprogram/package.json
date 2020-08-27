@@ -15,7 +15,7 @@
     }
   },
   "dependencies": {
-    "@vant/weapp": "^1.4.4",
+    "@vant/weapp": "^1.5.0",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

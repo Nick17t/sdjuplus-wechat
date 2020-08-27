@@ -119,14 +119,14 @@
     <van-transition
             show="{{showCourseChange}}"
             name=""
-            duration="{{ { enter: 300, leave: 1000 } }}"
+            duration="400"
             enter-class="van-enter-class"
             enter-active-class="van-enter-active-class"
             leave-active-class="van-leave-active-class"
             leave-to-class="van-leave-to-class"
     >
         <van-panel
-                title="课程详情"
+                title="{{courseSetting.data.has === false ? '新增课程' : '课程详情'}}"
                 custom-class="course-detail-panel"
                 header-class="course-detail-title"
         >
@@ -136,28 +136,69 @@
                         title="课程名称"
                         title-class="course-name-title"
                 >
-                    {{courseSetting.data.data.name}}
+                    <van-field
+                            name="course-name"
+                            placeholder="课程名称"
+                            border="{{false}}"
+                            custom-style="padding:0"
+                            input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
+                            input-align="right"
+                            require="{{courseSetting.isEdit}}"
+                            value="{{courseSetting.data.data.name}}"
+                            readonly="{{!courseSetting.isEdit}}"
+                            focus="{{courseSetting.isEdit}}"
+                    />
                 </van-cell>
                 <van-cell
                         icon="todo-list-o"
                         title="教室"
                         title-class="course-name-title"
                 >
-                    {{courseSetting.data.data.location}}
+                    <van-field
+                            name="course-location"
+                            placeholder="上课地点"
+                            border="{{false}}"
+                            custom-style="padding:0"
+                            input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
+                            input-align="right"
+                            require="{{courseSetting.isEdit}}"
+                            value="{{courseSetting.data.data.location}}"
+                            readonly="{{!courseSetting.isEdit}}"
+                    />
                 </van-cell>
                 <van-cell
                         icon="todo-list-o"
                         title="节数"
                         title-class="course-name-title"
                 >
-                    周{{c.getLessonWeek(courseSetting.data.data.node)}}  {{c.transformCourseNode(courseSetting.data.data.node)}}节
+                    <van-field
+                            name="course-location"
+                            placeholder="上课节数"
+                            border="{{false}}"
+                            custom-style="padding:0"
+                            input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
+                            input-align="right"
+                            require="{{courseSetting.isEdit}}"
+                            value="周{{c.getLessonWeek(courseSetting.data.data.node)}}  {{c.transformCourseNode(courseSetting.data.data.node)}}节"
+                            readonly="{{!courseSetting.isEdit}}"
+                    />
                 </van-cell>
                 <van-cell
                         icon="todo-list-o"
                         title="周数"
                         title-class="course-name-title"
                 >
-                    {{c.weekTransform(courseSetting.data.data.week)}}
+                    <van-field
+                            name="course-location"
+                            placeholder="上课地点"
+                            border="{{false}}"
+                            custom-style="padding:0"
+                            input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
+                            input-align="right"
+                            require="{{courseSetting.isEdit}}"
+                            value="{{c.weekTransform(courseSetting.data.data.week)}}"
+                            readonly="{{!courseSetting.isEdit}}"
+                    />
                 </van-cell>
             </van-cell-group>
             <view class="d-flex">
@@ -166,6 +207,7 @@
                             title="编辑"
                             clickable
                             center
+                            bind:tap="onEdit"
                     />
                 </view>
                 <view class="flex-1 text-center">
@@ -173,6 +215,7 @@
                             title="完成"
                             clickable
                             center
+                            bind:tap="onConfirm"
                     />
                 </view>
             </view>

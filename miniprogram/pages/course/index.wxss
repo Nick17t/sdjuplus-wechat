@@ -44,7 +44,16 @@
 
 .course-name-title {
     color: gray;
-    padding-right: 20rpx;
+}
+
+.course-input {
+    color: gray!important;
+    font-size: 14px!important;
+}
+
+.course-input-focus {
+    color: black!important;
+    font-size: 14px!important;
 }
 
 .van-enter-active-class,

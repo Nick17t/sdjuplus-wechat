@@ -1,6 +1,6 @@
 <wxs src="../../../core/wxs/course.wxs" module="c"></wxs>
 
-<view wx:if="{{!lesson.has}}" class="null">
+<view wx:if="{{!lesson.has}}" bind:longpress="showChangePanel" class="null">
 <!--    {{x}}-{{y}}-->
 </view>
 <view wx:else style="height: 100%" bind:longpress="showChangePanel">
@@ -10,8 +10,8 @@
             style="background-color: {{ c.hasCourseThisWeek(lesson,thisWeek) ? 'gray' :  lesson.data.color}};border-radius: {{lesson.isStart && lesson.isEnd ? '10rpx 10rpx 10rpx 10rpx;': '10rpx 10rpx 0 0;'}}">
         <text style="position: absolute; top: 10rpx;width: 90%;text-align: center">{{ lesson.data.name }}</text>
         <text style="position: absolute; top: {{lesson.isStart && lesson.isEnd ? '80rpx' : '100rpx'}};width: 90%;text-align: center">{{ lesson.data.location }}</text>
-        <text wx:if="{{c.hasCourseThisWeek(lesson,thisWeek)}}" style="position: absolute; top: 150rpx;left: 8rpx">(非本周)</text>
-        <text style="position: absolute; bottom: -100rpx;width: 90%;text-align: center">{{ lesson.data.teacher }}</text>
+        <text style="position: absolute; top: 150rpx;width: 90%;text-align: center">{{ lesson.data.teacher }}</text>
+<!--        <text wx:if="{{c.hasCourseThisWeek(lesson,thisWeek)}}" style="position: absolute; bottom: -100rpx;left: 8rpx">(非本周)</text>-->
     </view>
     <view wx:else
           class="endNode"

@@ -18,6 +18,7 @@
   "usingComponents": {
     "van-button": "@vant/weapp/button/index",
     "van-image": "@vant/weapp/image/index",
+    "van-field": "@vant/weapp/field/index",
     "van-row": "@vant/weapp/row/index",
     "van-col": "@vant/weapp/col/index",
     "van-cell": "@vant/weapp/cell/index",
