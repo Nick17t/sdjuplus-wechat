@@ -80,6 +80,14 @@
 					"id": -1,
 					"name": "pages/setting-course/index",
 					"pathName": "pages/setting-course/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/my/index",
+					"pathName": "pages/my/index",
+					"query": "reload=0",
 					"scene": null
 				}
 			]

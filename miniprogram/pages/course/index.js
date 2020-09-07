@@ -17,6 +17,12 @@ Page({
       height: 0,
       icon: 'arrow-down'
     },
+    numMultiArray: [
+      ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    ],
+    numMultiIndex: [0, 0, 0],
     setting: {
       showWeekend: true
     },
@@ -103,6 +109,7 @@ Page({
   },
 
   onLongPressCourse (e) {
+    console.log(e)
     this.setData({
       courseSetting: {
         data: e.detail.data,
@@ -130,6 +137,55 @@ Page({
   },
   onConfirm () {
     this.closePanel()
+  },
+  async bindMultiPickerChange (e) {
+    const list = e.detail.value
+    let courseSetting = {...this.data.courseSetting}
+    this.setData({
+      numMultiIndex: list
+    })
+    const node = course.generateNode(list)
+    const data = course.getData()
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].node === this.data.courseSetting.data.data.node) {
+        data[i].node = node
+        courseSetting.data.data.node = node
+        break;
+      }
+    }
+    this.setData({
+      courseSetting
+    })
+    course.setCourseList(data)
+    this.setData({
+      courseList: data
+    })
+    await course.uploadCourseData()
+  },
+  bindMultiPickerColumnChange (e) {
+    const changeIndex = e.detail.column
+    const changeValue = e.detail.value
+    const value = [...this.data.numMultiIndex]
+    const addEnd = () => {
+      value[1] = changeValue
+      value[2] = changeValue + 1
+    }
+    const subtractStart = () => {
+      value[1] = changeValue - 1
+      value[2] = changeValue
+    }
+    const updateWeek = () => {
+      value[0] = changeValue
+    }
+    switch (changeIndex) {
+    case 0: updateWeek(); break;
+    case 1 : addEnd(); break;
+    case 2 : subtractStart(); break;
+    }
+    this.setData({
+      numMultiIndex: value
+    })
   }
+
 }
 );

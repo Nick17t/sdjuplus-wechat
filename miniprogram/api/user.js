@@ -4,8 +4,8 @@
  */
 import { Http } from '../core/utils/http'
 
-export class User {
-  static async login () {
+export class UserApi {
+  static async login (code) {
     return await Http.request({
 
     })

@@ -71,6 +71,17 @@ class Course {
     }
   }
 
+  generateNode (list) {
+    const week = list[0] + 1
+    const start = list[1] + 1
+    const end = list[2] + 1
+    return `${week}-${start}&${week}-${end}`
+  }
+
+  async uploadCourseData () {
+
+  }
+
   async freshenCourse (userId, force = false) {
     if (force) {
       await this.updateCourseData(userId)

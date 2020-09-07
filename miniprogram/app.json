@@ -6,7 +6,8 @@
     "pages/useful-book/index",
     "pages/login/index",
     "pages/setting-color/index",
-    "pages/setting-course/index"
+    "pages/setting-course/index",
+    "pages/bindEdu/index"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

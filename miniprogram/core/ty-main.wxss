@@ -48,8 +48,8 @@ body {
 .h-50{ height: 625rpx; }
 /* 字体 */
 .font{ font-size: 18px; }
-.font-sm{ font-size: 15px!important; }
 .font-ssm{ font-size: 12px!important; }
+.font-sm{ font-size: 14px!important; }
 .font-md{ font-size: 25px!important; }
 .font-lg{ font-size: 30px!important; }
 .font-big{ font-size: 60px!important; }

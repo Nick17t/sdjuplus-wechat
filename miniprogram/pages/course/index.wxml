@@ -169,23 +169,35 @@
                 <van-cell
                         icon="todo-list-o"
                         title="节数"
+                        is-link
                         title-class="course-name-title"
                 >
-                    <van-field
-                            name="course-location"
-                            placeholder="上课节数"
-                            border="{{false}}"
-                            custom-style="padding:0"
-                            input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
-                            input-align="right"
-                            require="{{courseSetting.isEdit}}"
-                            value="周{{c.getLessonWeek(courseSetting.data.data.node)}}  {{c.transformCourseNode(courseSetting.data.data.node)}}节"
-                            readonly="{{!courseSetting.isEdit}}"
-                    />
+                    <picker mode="multiSelector"
+                            value="{{numMultiIndex}}"
+                            range="{{numMultiArray}}"
+                            disabled="{{!courseSetting.isEdit}}"
+                            bindchange="bindMultiPickerChange"
+                            bindcolumnchange="bindMultiPickerColumnChange"
+                    >
+                        <van-field
+                                name="course-num"
+                                placeholder="上课节数"
+                                border="{{false}}"
+                                custom-style="padding:0"
+                                disabled
+                                input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
+                                input-align="right"
+                                require="{{courseSetting.isEdit}}"
+                                value="周{{c.getLessonWeek(courseSetting.data.data.node)}}  {{c.transformCourseNode(courseSetting.data.data.node)}}节"
+                                readonly="{{!courseSetting.isEdit}}"
+                        />
+                    </picker>
+
                 </van-cell>
                 <van-cell
                         icon="todo-list-o"
                         title="周数"
+                        is-link
                         title-class="course-name-title"
                 >
                     <van-field

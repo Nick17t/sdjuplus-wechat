@@ -8,7 +8,7 @@ App({
     let config = new UserConfig();
     const course = new Course()
     course.freshenCourse(1002)
-    user.login();
+    // user.login();
   },
   globalData: {
     user: User
