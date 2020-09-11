@@ -1,6 +1,6 @@
 <wxs src="../../../core/wxs/course.wxs" module="c"></wxs>
 
-<scroll-view scroll-y enable-flex>
+<scroll-view scroll-y enable-flex enhanced show-scrollbar="{{false}}">
     <view class="d-flex">
         <view class="d-flex flex-1"
               wx:for="{{week}}"

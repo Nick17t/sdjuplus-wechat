@@ -58,7 +58,7 @@
            bind:close="closePanel"
 >
 <van-row>
-    <van-col span="6" wx:for="{{19}}">
+    <van-col span="6" wx:for="{{26}}">
         <van-button type="{{item === thisWeek ? 'info' : ''}}"
                     custom-class="mr-2 mb-2 week-button"
                     data-week="{{item}}"
@@ -169,7 +169,7 @@
                 <van-cell
                         icon="todo-list-o"
                         title="节数"
-                        is-link
+                        is-link="{{courseSetting.isEdit}}"
                         title-class="course-name-title"
                 >
                     <picker mode="multiSelector"
@@ -197,20 +197,29 @@
                 <van-cell
                         icon="todo-list-o"
                         title="周数"
-                        is-link
+                        is-link="{{courseSetting.isEdit}}"
                         title-class="course-name-title"
                 >
-                    <van-field
-                            name="course-location"
-                            placeholder="上课地点"
-                            border="{{false}}"
-                            custom-style="padding:0"
-                            input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
-                            input-align="right"
-                            require="{{courseSetting.isEdit}}"
-                            value="{{c.weekTransform(courseSetting.data.data.week)}}"
-                            readonly="{{!courseSetting.isEdit}}"
-                    />
+                    <picker
+                            mode="multiSelector"
+                            value="{{weekMultiIndex}}"
+                            range="{{weekMultiArray}}"
+                            disabled="{{!courseSetting.isEdit}}"
+                            bindchange="bindWeekMultiPickerChange"
+                    >
+                        <van-field
+                                name="course-location"
+                                placeholder="上课周"
+                                border="{{false}}"
+                                custom-style="padding:0"
+                                disabled
+                                input-class="{{courseSetting.isEdit ? 'course-input-focus' : 'course-input'}}"
+                                input-align="right"
+                                require="{{courseSetting.isEdit}}"
+                                value="{{c.weekTransform(courseSetting.data.data.week)}}"
+                                readonly="{{!courseSetting.isEdit}}"
+                        />
+                    </picker>
                 </van-cell>
             </van-cell-group>
             <view class="d-flex">

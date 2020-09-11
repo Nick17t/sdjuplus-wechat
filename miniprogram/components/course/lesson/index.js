@@ -29,6 +29,9 @@ Component({
   observers: {
     'courseList': function () {
       this.getLesson()
+    },
+    'thisWeek': function () {
+      this.getLesson()
     }
   },
 

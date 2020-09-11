@@ -72,9 +72,21 @@ function getDateWithI(i) {
   return month + "/" + (day + i - index)
 }
 
-function NumberToChineseTransform(number) {
+function weekToChineseTransform(number) {
   var arr = ['','一', '二', '三', '四', '五', '六', '日']
   return arr[number]
+}
+
+function numToChineseTransform(number) {
+  var numArr = ['', '一', '二', '三', '四', '五', '六', '七', '八', '九', '十' ]
+  if (number <= 10) {
+    return numArr[number]
+  } else if (number > 10 && number < 20) {
+    var next = number - 10
+    return numArr[numArr.length - 1] + numArr[next]
+  } else {
+    return numArr[Math.floor(number / 10)] + '十' + numArr[number % 10]
+  }
 }
 
 
@@ -86,5 +98,6 @@ module.exports = {
   getDateWithI: getDateWithI,
   getCourseStartTime: getCourseStartTime,
   getCourseEndTime: getCourseEndTime,
-  NumberToChineseTransform: NumberToChineseTransform
+  weekToChineseTransform: weekToChineseTransform,
+  numToChineseTransform: numToChineseTransform
 }

@@ -1,28 +1,40 @@
 import {Course} from '../../module/course'
 
 class Judger {
+  course = new Course()
+  static lessonNodes = []
+  static instance = null
   constructor () {
     if (Judger.instance !== null) {
       return this
     } else {
-      const course = new Course()
-      const courseData = course.getData()
+      const courseData = this.course.getData()
       this.genericLessonNodes(courseData)
       Judger.instance = this
     }
   }
-  static lessonNodes = []
-  static instance = null
   hasLesson (x, y, courseList) {
     let coordinate = `${x}-${y}`
     for (let i = 0; i < courseList.length; i++) {
-      const lessonNode = Judger.lessonNodes.find((v) => v.node === coordinate)
-      if (lessonNode) {
+      const lessonNode = Judger.lessonNodes.filter((v) => v.node === coordinate)
+      if (lessonNode.length === 1) {
         return {
           has: true,
-          data: courseList[lessonNode.index],
-          isStart: lessonNode.isStart,
-          isEnd: lessonNode.isEnd
+          data: courseList[lessonNode[0].index],
+          isStart: lessonNode[0].isStart,
+          isEnd: lessonNode[0].isEnd
+        }
+      } else if (lessonNode.length > 1) {
+        const thisWeek = this.course.getThisWeek().toString()
+        for (let j = 0; j < lessonNode.length; j++) {
+          if (courseList[lessonNode[j].index].week.split(',').includes(thisWeek)) {
+            return {
+              has: true,
+              data: courseList[lessonNode[j].index],
+              isStart: lessonNode[j].isStart,
+              isEnd: lessonNode[j].isEnd
+            }
+          }
         }
       } else if (lessonNode === undefined) {
         return {
@@ -59,6 +71,7 @@ class Judger {
           index: i,
           node: `${week}-${startNode}`
         })
+        break;
       }
       for (let j = startNode; j <= endNode; j++) {
         if (j == startNode) {

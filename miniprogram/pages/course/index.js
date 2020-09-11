@@ -23,6 +23,13 @@ Page({
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     ],
     numMultiIndex: [0, 0, 0],
+    weekMultiIndex: [0, 0, 0],
+    weekMultiArray: [
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+      [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+      ['单周', '双周', '全部']
+    ],
+    isInitSelect: true,
     setting: {
       showWeekend: true
     },
@@ -51,7 +58,7 @@ Page({
     const courseList = course.getData()
     this.setData({
       courseList,
-      thisWeek: Course.thisWeek
+      thisWeek: course.getThisWeek()
     })
   },
 
@@ -89,7 +96,7 @@ Page({
   },
   changeWeek (event) {
     const week = event.target.dataset.week;
-    Course.thisWeek = week
+    course.setThisWeek(week)
     this.setData({
       thisWeek: week
     });
@@ -110,9 +117,13 @@ Page({
 
   onLongPressCourse (e) {
     console.log(e)
+    const data = e.detail.data
+    if (data.data === null) {
+      data.data = this.initCourse()
+    }
     this.setData({
       courseSetting: {
-        data: e.detail.data,
+        data,
         x: e.detail.x,
         y: e.detail.y,
         isEdit: !e.detail.data.has
@@ -121,12 +132,12 @@ Page({
     })
   },
 
-  refreshCourse () {
-    course.freshenCourse(1002, true)
+  initCourse () {
+    return course.generateEmptyCourse()
   },
 
-  inputChange () {
-
+  refreshCourse () {
+    course.freshenCourse(1002, true)
   },
   onEdit () {
     const setting = {...this.data.courseSetting}
@@ -166,13 +177,18 @@ Page({
     const changeIndex = e.detail.column
     const changeValue = e.detail.value
     const value = [...this.data.numMultiIndex]
+    if (!this.data.isInitSelect && changeIndex !== 0) {
+      return
+    }
     const addEnd = () => {
       value[1] = changeValue
       value[2] = changeValue + 1
+      this.data.isInitSelect = false
     }
     const subtractStart = () => {
       value[1] = changeValue - 1
       value[2] = changeValue
+      this.data.isInitSelect = false
     }
     const updateWeek = () => {
       value[0] = changeValue
@@ -185,6 +201,9 @@ Page({
     this.setData({
       numMultiIndex: value
     })
+  },
+  bindWeekMultiPickerChange () {
+
   }
 
 }

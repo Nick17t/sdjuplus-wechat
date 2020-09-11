@@ -7,7 +7,7 @@
     <view
             wx:if="{{ lesson.isStart }}"
             class="startNode"
-            style="background-color: {{ c.hasCourseThisWeek(lesson,thisWeek) ? 'gray' :  lesson.data.color}};border-radius: {{lesson.isStart && lesson.isEnd ? '10rpx 10rpx 10rpx 10rpx;': '10rpx 10rpx 0 0;'}}">
+            style="background-color: {{ c.hasCourseThisWeek(lesson,thisWeek) ? lesson.data.color :  'gray'}};border-radius: {{lesson.isStart && lesson.isEnd ? '10rpx 10rpx 10rpx 10rpx;': '10rpx 10rpx 0 0;'}}">
         <text style="position: absolute; top: 10rpx;width: 90%;text-align: center">{{ lesson.data.name }}</text>
         <text style="position: absolute; top: {{lesson.isStart && lesson.isEnd ? '80rpx' : '100rpx'}};width: 90%;text-align: center">{{ lesson.data.location }}</text>
         <text style="position: absolute; top: 150rpx;width: 90%;text-align: center">{{ lesson.data.teacher }}</text>
@@ -15,7 +15,7 @@
     </view>
     <view wx:else
           class="endNode"
-          style="background-color: {{ c.hasCourseThisWeek(lesson,thisWeek) ? 'gray' :  lesson.data.color }};border-radius: {{lesson.isEnd ? '0rpx 0rpx 10rpx 10rpx;' : ''}}"
+          style="background-color: {{ c.hasCourseThisWeek(lesson,thisWeek) ? lesson.data.color :  'gray' }};border-radius: {{lesson.isEnd ? '0rpx 0rpx 10rpx 10rpx;' : ''}}"
     >
     </view>
 </view>

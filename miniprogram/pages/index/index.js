@@ -4,7 +4,7 @@ import {randomColor} from '../../core/utils/common';
 const app = getApp();
 import Notify from '../../miniprogram_npm/@vant/weapp/notify/notify.js';
 import {Course} from '../../module/course'
-
+const course = new Course()
 Page({
   data: {
     grid: [
@@ -25,11 +25,17 @@ Page({
       }
     ],
     showMain: false,
-    userCourseList: []
+    userCourseList: [],
+    thisWeek: course.getThisWeek()
   },
 
   onLoad: function () {
     this.showTransition();
+  },
+  onShow () {
+    this.setData({
+      thisWeek: course.getThisWeek()
+    })
   },
 
   onReady () {

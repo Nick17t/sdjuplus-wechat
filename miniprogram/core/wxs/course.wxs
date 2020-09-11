@@ -24,7 +24,7 @@ function todayCourseFilter(courseList) {
  */
 function getLessonWeek(node) {
   if (node) {
-    return time.NumberToChineseTransform(parseInt(node.charAt(0)))
+    return time.weekToChineseTransform(parseInt(node.charAt(0)))
   }
 }
 
@@ -52,6 +52,7 @@ function hasCourseThisWeek(lesson, thisWeek) {
   var week = lesson.data.week.split(',')
   for (var i = 0; i < week.length; i++) {
     if (week[i] == thisWeek) {
+      console.log(lesson.data.name)
       return true
     }
   }
