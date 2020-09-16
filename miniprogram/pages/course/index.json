@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "time-table": "/components/course/timetable/index"
-  },
-  "pureDataPattern": "^pure_",
-  "navigationStyle": "custom"
-}
