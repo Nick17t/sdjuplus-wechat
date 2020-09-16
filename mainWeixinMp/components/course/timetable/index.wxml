@@ -1,0 +1,28 @@
+<wxs src="../../../core/wxs/course.wxs" module="c"></wxs>
+
+<scroll-view scroll-y enable-flex enhanced show-scrollbar="{{false}}">
+    <view class="d-flex">
+        <view class="d-flex flex-1"
+              wx:for="{{week}}"
+              wx:if="{{x}}"
+              wx:for-item="x"
+              wx:key="index"
+        >
+            <view class="d-flex flex-1 flex-column a-center j-center">
+                <view class="d-flex a-center j-center"
+                      style="min-height: 120rpx;width: 100%;"
+                      wx:for="{{13}}"
+                      wx:if="{{y}}"
+                      wx:for-item="y"
+                >
+                    <lesson
+                            x="{{x}}"
+                            y="{{y}}"
+                            courseList="{{courseList}}"
+                            thisWeek="{{thisWeek}}"
+                    ></lesson>
+                </view>
+            </view>
+        </view>
+    </view>
+</scroll-view>

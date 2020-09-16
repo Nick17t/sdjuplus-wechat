@@ -1,0 +1,78 @@
+/* miniprogram/pages/course/index.wxss */
+
+.setting {
+    position: absolute;
+    right: 276rpx;
+    z-index: 9999;
+}
+
+.weeks {
+    display: flex;
+    min-height: 100rpx;
+    box-shadow: 0rpx 3rpx 5rpx #888888;
+    border: 0rpx;
+}
+
+.week-button {
+    width: 173rpx;
+    box-shadow: 0rpx 3rpx 5rpx #888888;
+    background-color: white;
+}
+
+.course {
+    min-height: 100%;
+}
+
+.lesson-list {
+    position: relative;
+    overflow: hidden;
+}
+
+.panel {
+    padding: 140rpx 0rpx 0 0rpx;
+
+}
+
+.course-detail-panel {
+    min-width: 500rpx;
+}
+
+.course-detail-title {
+    font-size: 18px!important;
+    font-weight: bold;
+}
+
+.course-name-title {
+    color: gray;
+}
+
+.course-input {
+    color: gray!important;
+    font-size: 14px!important;
+}
+
+.course-input-focus {
+    color: black!important;
+    font-size: 14px!important;
+}
+
+.van-enter-active-class,
+.van-leave-active-class {
+    transition-property: background-color, transform;
+}
+
+.van-enter-class,
+.van-leave-to-class {
+    background-color: red;
+    transform: rotate(-360deg) translate3d(-100%, -100%, 0);
+}
+page {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+    display: none;
+}

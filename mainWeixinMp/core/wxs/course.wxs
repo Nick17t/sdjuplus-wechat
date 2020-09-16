@@ -1,0 +1,104 @@
+var date = getDate()
+var week = ["日", "一", "二", "三", "四", "五", "六"]
+var time = require('./time.wxs')
+
+/**
+ * 获取当天的课程
+ * @param courseList
+ * @returns {[]}
+ */
+function todayCourseFilter(courseList) {
+  var today = date.getDay()
+  var res = []
+  for (var i = 0; i < courseList.length; i++) {
+    if (courseList[i].node.charAt(0) == today) {
+      res.push(courseList[i])
+    }
+  }
+  return res
+}
+
+/**
+ * 获取课程在周几上
+ * @param node
+ */
+function getLessonWeek(node) {
+  if (node) {
+    return time.weekToChineseTransform(parseInt(node.charAt(0)))
+  }
+}
+
+/**
+ * 获取某一课程的节点
+ * @param node
+ * @returns {string}
+ */
+function transformCourseNode(node) {
+  if (node) {
+    var nodeList = node.split('&')
+    var start = nodeList[0].charAt(2)
+    var end = nodeList[1].charAt(2)
+    return start + "-" + end
+  }
+}
+
+/**
+ * 判断课程在当前周是否有课
+ * @param lesson
+ * @param thisWeek
+ * @returns {boolean}
+ */
+function hasCourseThisWeek(lesson, thisWeek) {
+  var week = lesson.data.week.split(',')
+  for (var i = 0; i < week.length; i++) {
+    if (week[i] == thisWeek) {
+      console.log(lesson.data.name)
+      return true
+    }
+  }
+  return false
+}
+
+function weekTransform(week) {
+  var isContinuation = true;
+  var isOdd = false
+  var isEven = false
+  if (week && week.length > 1) {
+    var weekArr = week.split(',')
+    var startWeek = weekArr[0]
+    var endWeek = weekArr[weekArr.length - 1]
+    for (var i = 1; i <= weekArr.length; i++) {
+      if (i != weekArr[i - 1]) {
+        isContinuation = false
+      }
+      if (parseInt(weekArr[i - 1]) % 2 == 0) {
+        isEven = true
+      } else if (parseInt(weekArr[i - 1]) % 2 != 0) {
+        isOdd = true
+      }
+    }
+    if (isContinuation) {
+      return startWeek + '-' + endWeek
+    } else {
+      if (isOdd && isEven) {
+        return weekArr
+      } else {
+        if (isEven && !isOdd) {
+          return startWeek + '-' + endWeek + " (双周)"
+        } else if (isOdd && !isEven) {
+          return startWeek + '-' + endWeek + " (单周)"
+        }
+      }
+    }
+  } else {
+    return week
+  }
+}
+
+module.exports = {
+  todayCourseFilter: todayCourseFilter,
+  transformCourseNode: transformCourseNode,
+  hasCourseThisWeek: hasCourseThisWeek,
+  getLessonWeek: getLessonWeek,
+  weekTransform: weekTransform
+}
